@@ -21,6 +21,7 @@ data "tfe_outputs" "source_workspace" {
 resource "aws_instance" "app_server" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
+  associate_public_ip_address = true
 
   vpc_security_group_ids = data.tfe_outputs.source_workspace.nonsensitive_values.vpc_security_group_ids
   subnet_id              = data.tfe_outputs.source_workspace.nonsensitive_values.vpc_subnet[0]
